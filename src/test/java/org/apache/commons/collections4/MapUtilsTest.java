@@ -1069,6 +1069,7 @@ public class MapUtilsTest extends AbstractAvailableLocalesTest {
         
         assertEquals(val.intValue(), MapUtils.getNumber(in,"key", val).intValue(), 0);
         assertEquals(val.intValue(), MapUtils.getNumber(in,"noKey", val).intValue(), 0);
+        assertEquals(null, MapUtils.getNumber(null,"noKey"));
         
     }
     
@@ -1118,7 +1119,13 @@ public class MapUtilsTest extends AbstractAvailableLocalesTest {
         
         assertTrue(MapUtils.getBooleanValue(inStr,"str1", true));
         assertTrue(MapUtils.getBoolean(inStr,"str1", true));
-
+        
+        final Map<String, Number> inNum = new HashMap<>();
+        inNum.put("str0", 0);
+        inNum.put("str1", 1);
+        
+        assertTrue(!MapUtils.getBoolean(inNum,"str0", true));
+        assertTrue(MapUtils.getBoolean(inNum,"str1", true));
 
     }
     
